@@ -32,10 +32,3 @@ let main () =
   printf "answer %d\n" !i
 
 let _ = main ()
-
-
-
-
-
-
-
