@@ -1,5 +1,5 @@
-*.cmi
-*.cmo
-*.cmx
-*.o
-*.out
+**/*.cmi
+**/*.cmo
+**/*.cmx
+**/*.o
+**/*.out
