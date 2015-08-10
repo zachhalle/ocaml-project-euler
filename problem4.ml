@@ -17,28 +17,26 @@ let num_to_arr x =
 
 let num_is_pallindrome x = arr_is_pallindrome (num_to_arr x)
 
-exception Finished
-
-let rec inner i j = 
-  if j < i 
-  then None
+let rec inner best i j =
+  if j < 900 then best
   else 
-    let ij = i * j in 
-    if num_is_pallindrome ij
-    then Some (ij, i, j)
-    else inner i (j - 1)
+    let ij = i * j in
+    let next = 
+      if num_is_pallindrome ij && ij > best
+      then ij
+      else best
+    in
+    inner next i (j - 1)
 
-let rec outer i = 
-  if i < 100
-  then None
+let rec outer best i =
+  if i < 900 
+  then best
   else 
-    match inner i 999 with
-    | None -> outer (i - 1)
-    | answer -> answer
+    let next = inner best i 999 in
+    outer next (i - 1)
 
 let main () =
-  match outer 999 with
-  | None -> printf "Nothing found\n"
-  | Some (x, y, z) -> printf "answer: %d %d %d\n" x y z
+  let answer = outer (-1) 999 in
+  printf "answer: %d\n" answer
 
 let _ = main ()
